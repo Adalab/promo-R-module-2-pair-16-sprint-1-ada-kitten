@@ -1,6 +1,6 @@
 "use strict";
 const newForm = document.querySelector('.js-new-form');
-newForm.classList.remove("collapsed");
+// newForm.classList.remove("collapsed");
 
 const listElement = document.querySelector('.js-list');
 
@@ -25,7 +25,7 @@ const kittenThreeDesc = " Ruiseño, juguetón, le guta estar tranquilo y que nad
 const kittenThreeRace = "British Shorthair";
 
 const input_search_desc = document.querySelector('.js_in_search_desc');
-input_search_desc.value = 'juguetón';
+input_search_desc.value = '';
 const descrSearchText = input_search_desc.value;
 
 
@@ -50,29 +50,39 @@ let kittenOne = `<li class="card">
 </article>
 </li>`;
 
-const kittenTwo = `<li class="card">
+let kittenTwo = `<li class="card">
 <img
   class="card_img"
   src= ${kittenTwoImage}
   alt="gatito"
 />
-<h3 class="card_title">${kittenTwoNameUpper}</h3>
-<h4 class="card_race">${kittenTwoRace}</h4>
-<p class="card_description">
+<h3 class="card_title">${kittenTwoNameUpper}</h3>`;
+
+if (kittenTwoRace === "") {
+  kittenTwo += `No se ha especificado la raza`;
+} else {
+  kittenTwo += kittenTwoRace;
+}
+kittenTwo += `<p class="card_description">
 ${kittenTwoDesc}
 </p>
 </li>`;
 
 
-const kittenThree = ` <li class="card">
+let kittenThree = ` <li class="card">
 <img
   class="card_img"
   src=${kittenThreeImage}
   alt="gatito"
 />
-<h3 class="card_title">${kittenThreeNameUpper}</h3>
-<h4 class="card_race">${kittenThreeRace}</h4>
-<p class="card_description">
+<h3 class="card_title">${kittenThreeNameUpper}</h3>`;
+
+if (kittenThreeRace === "") {
+  kittenThree += `No se ha especificado la raza`;
+} else {
+  kittenThree += kittenThreeRace;
+}
+kittenThree += `<p class="card_description">
 ${kittenThreeDesc}
 </p>
 </li>`;
@@ -90,8 +100,70 @@ if (kittenThreeDesc.includes(descrSearchText)) {
 }
 
 
-if (newForm.classList.contains('collapsed')) {
+
+
+const plusCircle = document.querySelector(".js-plus-circle");
+
+plusCircle.addEventListener("click", (event) =>{
+  event.preventDefault();
+  if (newForm.classList.contains('collapsed')) {
     newForm.classList.remove('collapsed')
 } else {
     newForm.classList.add('collapsed')
 }
+  
+})
+
+const btnAdd = document.querySelector(".js-btn-add");
+const inputDesc = document.querySelector('.js-input-desc');
+const inputPhoto = document.querySelector('.js-input-photo');
+const inputName = document.querySelector('.js-input-name');
+const labelMesageError = document.querySelector('.js-label-error');
+
+
+
+btnAdd.addEventListener("click", (event) =>{
+  event.preventDefault();
+  const valueDesc = inputDesc.value;
+  const valuePhoto = inputPhoto.value;
+  const valueName = inputName.value;
+  if (valueDesc === '' || valuePhoto === '' || valueName === '') {
+    labelMesageError.innerHTML = "Debe rellenar todos los valores";
+  } else {
+    labelMesageError.innerHTML = "" ;
+  }
+})
+
+
+const btnSearch = document.querySelector(".js-button-search");
+const searchDesc = document.querySelector('.js_in_search_desc');
+const searchRace = document.querySelector (".js-input-race");
+const searchResult = document.querySelector (".js-result-search");
+
+
+
+btnSearch.addEventListener("click", (event) =>{
+  event.preventDefault();
+  const valueDesc = searchDesc.value;
+  const valueRace = searchRace.value;
+  if (valueDesc === '' || valueRace === '') {
+    searchResult.innerHTML = "Debe rellenar todos los valores";
+  } else {
+    searchResult.innerHTML = "" ;
+  }
+})
+
+const btnCancel = document.querySelector(".js-btn-cancel");
+
+
+btnCancel.addEventListener ("click", (event) => {
+  event.preventDefault();
+  // const valueDesc = inputDesc.value;
+  // const valuePhoto = inputPhoto.value;
+  // const valueName = inputName.value;
+
+  // falta crear variables para value
+})
+
+
+
