@@ -29,65 +29,65 @@ input_search_desc.value = '';
 const descrSearchText = input_search_desc.value;
 
 
-let kittenOne = `<li class="card">
-<article>
-  <img
-    class="card_img"
-    src= ${kittenOneImage}
-    alt="gatito"
-  />
-  <h3 class="card_title"> ${kittenOneNameUpper}</h3>`;
+// let kittenOne = `<li class="card">
+// <article>
+//   <img
+//     class="card_img"
+//     src= ${kittenOneImage}
+//     alt="gatito"
+//   />
+//   <h3 class="card_title"> ${kittenOneNameUpper}</h3>`;
 
-  if (kittenOneRace === "") {
-    kittenOne += `No se ha especificado la raza`;
-  } else {
-    kittenOne += kittenOneRace;
-  }
+//   if (kittenOneRace === "") {
+//     kittenOne += `No se ha especificado la raza`;
+//   } else {
+//     kittenOne += kittenOneRace;
+//   }
   
-  kittenOne += `<p class="card_description">
-  ${kittenOneDesc}
-  </p>
-</article>
-</li>`;
+//   kittenOne += `<p class="card_description">
+//   ${kittenOneDesc}
+//   </p>
+// </article>
+// </li>`;
 
-let kittenTwo = `<li class="card">
-<img
-  class="card_img"
-  src= ${kittenTwoImage}
-  alt="gatito"
-/>
-<h3 class="card_title">${kittenTwoNameUpper}</h3>`;
+// let kittenTwo = `<li class="card">
+// <img
+//   class="card_img"
+//   src= ${kittenTwoImage}
+//   alt="gatito"
+// />
+// <h3 class="card_title">${kittenTwoNameUpper}</h3>`;
 
-if (kittenTwoRace === "") {
-  kittenTwo += `No se ha especificado la raza`;
-} else {
-  kittenTwo += kittenTwoRace;
-}
-kittenTwo += `<p class="card_description">
-${kittenTwoDesc}
-</p>
-</li>`;
+// if (kittenTwoRace === "") {
+//   kittenTwo += `No se ha especificado la raza`;
+// } else {
+//   kittenTwo += kittenTwoRace;
+// }
+// kittenTwo += `<p class="card_description">
+// ${kittenTwoDesc}
+// </p>
+// </li>`;
 
 
-let kittenThree = ` <li class="card">
-<img
-  class="card_img"
-  src=${kittenThreeImage}
-  alt="gatito"
-/>
-<h3 class="card_title">${kittenThreeNameUpper}</h3>`;
+// let kittenThree = ` <li class="card">
+// <img
+//   class="card_img"
+//   src=${kittenThreeImage}
+//   alt="gatito"
+// />
+// <h3 class="card_title">${kittenThreeNameUpper}</h3>`;
 
-if (kittenThreeRace === "") {
-  kittenThree += `No se ha especificado la raza`;
-} else {
-  kittenThree += kittenThreeRace;
-}
-kittenThree += `<p class="card_description">
-${kittenThreeDesc}
-</p>
-</li>`;
+// if (kittenThreeRace === "") {
+//   kittenThree += `No se ha especificado la raza`;
+// } else {
+//   kittenThree += kittenThreeRace;
+// }
+// kittenThree += `<p class="card_description">
+// ${kittenThreeDesc}
+// </p>
+// </li>`;
 
-listElement.innerHTML = kittenOne + kittenTwo + kittenThree;
+// listElement.innerHTML = kittenOne + kittenTwo + kittenThree;
 
 if (kittenOneDesc.includes(descrSearchText)) {
   listElement.innerHTML = kittenOne;
@@ -103,21 +103,22 @@ if (kittenThreeDesc.includes(descrSearchText)) {
 
 
 const plusCircle = document.querySelector(".js-plus-circle");
-
-plusCircle.addEventListener("click", (event) =>{
-  event.preventDefault();
-  if (newForm.classList.contains('collapsed')) {
-    newForm.classList.remove('collapsed')
-} else {
-    newForm.classList.add('collapsed')
-}
-  
-})
+// ESTE EVENTO LO HE MOVIDO A LA FUNCION MAS ABAJO
+// plusCircle.addEventListener("click", (event) =>{
+//   event.preventDefault();
+//   if (newForm.classList.contains('collapsed')) {
+//     newForm.classList.remove('collapsed')
+// } else {
+//     newForm.classList.add('collapsed')
+// }
+  // 
+// })
 
 const btnAdd = document.querySelector(".js-btn-add");
 const inputDesc = document.querySelector('.js-input-desc');
 const inputPhoto = document.querySelector('.js-input-photo');
 const inputName = document.querySelector('.js-input-name');
+const inputRace = document.querySelector(".js-input-race");
 const labelMesageError = document.querySelector('.js-label-error');
 
 
@@ -154,16 +155,72 @@ btnSearch.addEventListener("click", (event) =>{
 })
 
 const btnCancel = document.querySelector(".js-btn-cancel");
-
+const valueRace = inputRace.value;
 
 btnCancel.addEventListener ("click", (event) => {
   event.preventDefault();
-  // const valueDesc = inputDesc.value;
-  // const valuePhoto = inputPhoto.value;
-  // const valueName = inputName.value;
+  newForm.classList.add("collapsed");
+  inputName.value = "";
+  inputPhoto.value = "";
+  inputDesc.value = "";
+  inputRace.value = "";
 
-  // falta crear variables para value
 })
 
 
+// funciones
+
+// estas funciones las pedian en el ejercicio pero no hacen nada.
+// function showNewCatForm() {
+//   newForm.classList.remove('collapsed');
+  
+// }
+// function hideNewCatForm() {
+//   newForm.classList.add('collapsed');
+// }
+
+plusCircle.addEventListener('click', handleClickNewCatForm);
+
+function handleClickNewCatForm(event) {
+  event.preventDefault();
+  if (newForm.classList.contains('collapsed')) {
+    newForm.classList.remove('collapsed');
+  } else {
+    newForm.classList.add('collapsed');
+  }
+}
+
+// crear un nuevo gatito
+
+
+
+// ej: const kittenOne = ${kittenOneImage} ${kittenOneName} ${kittenOneNameUpper} ${kittenOneRace};
+
+
+function renderKitten(url, desc, name, race) {
+  const newKitten = `<li class="card">
+<article>
+  <img
+    class="card_img"
+    src= ${kittenImage}
+    alt="gatito"
+  />
+  <h3 class="card_title"> ${kittenNameUpper}</h3>`;
+
+  if (kittenRace === "") {
+    kittenOne += `No se ha especificado la raza`;
+  } else {
+    kittenOne += kittenOneRace;
+  }
+  
+  kittenOne += `<p class="card_description">
+  ${kittenDesc}
+  </p>
+</article>
+</li>`;
+
+
+
+
+}
 
