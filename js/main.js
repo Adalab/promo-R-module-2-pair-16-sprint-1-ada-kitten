@@ -24,70 +24,70 @@ const kittenThreeNameUpper = kittenThreeName.toUpperCase();
 const kittenThreeDesc = " Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!";
 const kittenThreeRace = "British Shorthair";
 
-const input_search_desc = document.querySelector('.js_in_search_desc');
-input_search_desc.value = '';
-const descrSearchText = input_search_desc.value;
+// const input_search_desc = document.querySelector('.js_in_search_desc');
+// input_search_desc.value = '';
+// const descrSearchText = input_search_desc.value;
 
 
-let kittenOne = `<li class="card">
-<article>
-  <img
-    class="card_img"
-    src= ${kittenOneImage}
-    alt="gatito"
-  />
-  <h3 class="card_title"> ${kittenOneNameUpper}</h3>`;
+// let kittenOne = `<li class="card">
+// <article>
+//   <img
+//     class="card_img"
+//     src= ${kittenOneImage}
+//     alt="gatito"
+//   />
+//   <h3 class="card_title"> ${kittenOneNameUpper}</h3>`;
 
-  if (kittenOneRace === "") {
-    kittenOne += `No se ha especificado la raza`;
-  } else {
-    kittenOne += kittenOneRace;
-  }
+//   if (kittenOneRace === "") {
+//     kittenOne += `No se ha especificado la raza`;
+//   } else {
+//     kittenOne += kittenOneRace;
+//   }
   
-  kittenOne += `<p class="card_description">
-  ${kittenOneDesc}
-  </p>
-</article>
-</li>`;
+//   kittenOne += `<p class="card_description">
+//   ${kittenOneDesc}
+//   </p>
+// </article>
+// </li>`;
 
-let kittenTwo = `<li class="card">
-<img
-  class="card_img"
-  src= ${kittenTwoImage}
-  alt="gatito"
-/>
-<h3 class="card_title">${kittenTwoNameUpper}</h3>`;
+// let kittenTwo = `<li class="card">
+// <img
+//   class="card_img"
+//   src= ${kittenTwoImage}
+//   alt="gatito"
+// />
+// <h3 class="card_title">${kittenTwoNameUpper}</h3>`;
 
-if (kittenTwoRace === "") {
-  kittenTwo += `No se ha especificado la raza`;
-} else {
-  kittenTwo += kittenTwoRace;
-}
-kittenTwo += `<p class="card_description">
-${kittenTwoDesc}
-</p>
-</li>`;
+// if (kittenTwoRace === "") {
+//   kittenTwo += `No se ha especificado la raza`;
+// } else {
+//   kittenTwo += kittenTwoRace;
+// }
+// kittenTwo += `<p class="card_description">
+// ${kittenTwoDesc}
+// </p>
+// </li>`;
 
 
-let kittenThree = ` <li class="card">
-<img
-  class="card_img"
-  src=${kittenThreeImage}
-  alt="gatito"
-/>
-<h3 class="card_title">${kittenThreeNameUpper}</h3>`;
+// let kittenThree = ` <li class="card">
+// <img
+//   class="card_img"
+//   src=${kittenThreeImage}
+//   alt="gatito"
+// />
+// <h3 class="card_title">${kittenThreeNameUpper}</h3>`;
 
-if (kittenThreeRace === "") {
-  kittenThree += `No se ha especificado la raza`;
-} else {
-  kittenThree += kittenThreeRace;
-}
-kittenThree += `<p class="card_description">
-${kittenThreeDesc}
-</p>
-</li>`;
+// if (kittenThreeRace === "") {
+//   kittenThree += `No se ha especificado la raza`;
+// } else {
+//   kittenThree += kittenThreeRace;
+// }
+// kittenThree += `<p class="card_description">
+// ${kittenThreeDesc}
+// </p>
+// </li>`;
 
-listElement.innerHTML = kittenOne + kittenTwo + kittenThree;
+// listElement.innerHTML = kittenOne + kittenTwo + kittenThree;
 
 
 
@@ -131,33 +131,45 @@ function addNewKitten(event) {
 
 const btnSearch = document.querySelector(".js-button-search");
 const searchDesc = document.querySelector('.js_in_search_desc');
-const searchRace = document.querySelector (".js-input-race");
+const searchRace = document.querySelector (".js_in_search_race");
 const searchResult = document.querySelector (".js-result-search");
 
-const filterKitten = (event) => {
 
-  if (kittenOneDesc.includes(descrSearchText)) {
-    listElement.innerHTML = kittenOne;
-  }
-  if (kittenTwoDesc.includes(descrSearchText)) {
-    listElement.innerHTML += kittenTwo;
-  }
-  if (kittenThreeDesc.includes(descrSearchText)) {
-    listElement.innerHTML += kittenThree;
-  }
-}  
 btnSearch.addEventListener("click", (event) =>{
   event.preventDefault();
   const valueDesc = searchDesc.value;
   const valueRace = searchRace.value;
   if (valueDesc === '' || valueRace === '') {
     searchResult.innerHTML = "Debe rellenar todos los valores";
-  } else {
+  }
+   else {
     searchResult.innerHTML = "" ;
   }
 })
 
+
+const filterKitten = (event) => {
+  const kitten = cat1.kittenOneDesc;
+  const valueDesc = searchDesc.value;
+  
+  if (kitten.includes(valueDesc)) {
+  console.log('jsjs');
+    listElement.innerHTML += kitten;
+  }
+  // if (kittenTwoDesc.includes(descrSearchText)) {
+  //   listElement.innerHTML += kitten;
+  // }
+  // if (kittenThreeDesc.includes(descrSearchText)) {
+  //   listElement.innerHTML += kittenThree;
+  // }
+  
+}  
+
+
 btnSearch.addEventListener('click', filterKitten);
+
+
+
 
 
 
@@ -201,11 +213,11 @@ function handleClickNewCatForm(event) {
 
 
 
-// ej: const kittenOne = ${kittenOneImage} ${kittenOneName} ${kittenOneNameUpper} ${kittenOneRace};
-
+debugger;
 
 function renderKitten(url, desc, name, race) {
-  let kitten = `<li class="card">
+  
+  let result = `<li class="card">
   <article>
   <img
     class="card_img"
@@ -215,19 +227,27 @@ function renderKitten(url, desc, name, race) {
   <h3 class="card_title"> ${name}</h3>`;
 
   if (race === "") {
-    kitten += `No se ha especificado la raza`;
+    result += `No se ha especificado la raza`;
   } else {
-    kitten += race;
+    result += race;
   }
   
-  kitten += `<p class="card_description">
+  result += `<p class="card_description">
   ${desc}
   </p>
 </article>
 </li>`;
-listElement.innerHTML += kitten;
-
+return result;
 }
 
- renderKitten  ("https://images.emedicinehealth.com/images/article/main_image/cat-scratch-disease.jpg", " Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!","Anastacio", "British Shorthair" );
+//  Preguntar mañana
+// const cat1 = renderKitten ("https://ychef.files.bbci.co.uk/976x549/p07ryyyj.jpg", " Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!","Anastacio", "British Shorthair" );
+// const cat2 =renderKitten  ("https://images.emedicinehealth.com/images/article/main_image/cat-scratch-disease.jpg", " Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!","Fiona", "British Shorthair" );
+// const cat3 = renderKitten  ("https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/newscms/2019_39/3021711/190923-cat-pet-stock-cs-1052a.jpg", " Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!","Cielo", "British Shorthair" );
 
+
+const cat1 = renderKitten(`${kittenOneImage}`, `${kittenOneDesc}`, `${kittenOneNameUpper}`, `${kittenOneRace}`);
+const cat2 = renderKitten(`${kittenTwoImage}`, `${kittenTwoDesc}`, `${kittenTwoNameUpper}`, `${kittenTwoRace}`);
+const cat3 = renderKitten(`${kittenThreeImage}`, `${kittenThreeDesc}`, `${kittenThreeNameUpper}`, `${kittenThreeRace}`);
+
+listElement.innerHTML = cat1 + cat2 + cat3;
