@@ -29,75 +29,66 @@ input_search_desc.value = '';
 const descrSearchText = input_search_desc.value;
 
 
-// let kittenOne = `<li class="card">
-// <article>
-//   <img
-//     class="card_img"
-//     src= ${kittenOneImage}
-//     alt="gatito"
-//   />
-//   <h3 class="card_title"> ${kittenOneNameUpper}</h3>`;
+let kittenOne = `<li class="card">
+<article>
+  <img
+    class="card_img"
+    src= ${kittenOneImage}
+    alt="gatito"
+  />
+  <h3 class="card_title"> ${kittenOneNameUpper}</h3>`;
 
-//   if (kittenOneRace === "") {
-//     kittenOne += `No se ha especificado la raza`;
-//   } else {
-//     kittenOne += kittenOneRace;
-//   }
+  if (kittenOneRace === "") {
+    kittenOne += `No se ha especificado la raza`;
+  } else {
+    kittenOne += kittenOneRace;
+  }
   
-//   kittenOne += `<p class="card_description">
-//   ${kittenOneDesc}
-//   </p>
-// </article>
-// </li>`;
+  kittenOne += `<p class="card_description">
+  ${kittenOneDesc}
+  </p>
+</article>
+</li>`;
 
-// let kittenTwo = `<li class="card">
-// <img
-//   class="card_img"
-//   src= ${kittenTwoImage}
-//   alt="gatito"
-// />
-// <h3 class="card_title">${kittenTwoNameUpper}</h3>`;
+let kittenTwo = `<li class="card">
+<img
+  class="card_img"
+  src= ${kittenTwoImage}
+  alt="gatito"
+/>
+<h3 class="card_title">${kittenTwoNameUpper}</h3>`;
 
-// if (kittenTwoRace === "") {
-//   kittenTwo += `No se ha especificado la raza`;
-// } else {
-//   kittenTwo += kittenTwoRace;
-// }
-// kittenTwo += `<p class="card_description">
-// ${kittenTwoDesc}
-// </p>
-// </li>`;
-
-
-// let kittenThree = ` <li class="card">
-// <img
-//   class="card_img"
-//   src=${kittenThreeImage}
-//   alt="gatito"
-// />
-// <h3 class="card_title">${kittenThreeNameUpper}</h3>`;
-
-// if (kittenThreeRace === "") {
-//   kittenThree += `No se ha especificado la raza`;
-// } else {
-//   kittenThree += kittenThreeRace;
-// }
-// kittenThree += `<p class="card_description">
-// ${kittenThreeDesc}
-// </p>
-// </li>`;
-
-// listElement.innerHTML = kittenOne + kittenTwo + kittenThree;
-
-if (kittenOneDesc.includes(descrSearchText)) {
-  listElement.innerHTML = kittenOne;
+if (kittenTwoRace === "") {
+  kittenTwo += `No se ha especificado la raza`;
+} else {
+  kittenTwo += kittenTwoRace;
 }
-if (kittenTwoDesc.includes(descrSearchText)) {
-  listElement.innerHTML += kittenTwo;
+kittenTwo += `<p class="card_description">
+${kittenTwoDesc}
+</p>
+</li>`;
+
+
+let kittenThree = ` <li class="card">
+<img
+  class="card_img"
+  src=${kittenThreeImage}
+  alt="gatito"
+/>
+<h3 class="card_title">${kittenThreeNameUpper}</h3>`;
+
+if (kittenThreeRace === "") {
+  kittenThree += `No se ha especificado la raza`;
+} else {
+  kittenThree += kittenThreeRace;
 }
-if (kittenThreeDesc.includes(descrSearchText)) {
-  listElement.innerHTML += kittenThree;
-}
+kittenThree += `<p class="card_description">
+${kittenThreeDesc}
+</p>
+</li>`;
+
+listElement.innerHTML = kittenOne + kittenTwo + kittenThree;
+
 
 
 
@@ -123,7 +114,9 @@ const labelMesageError = document.querySelector('.js-label-error');
 
 
 
-btnAdd.addEventListener("click", (event) =>{
+
+btnAdd.addEventListener('click', addNewKitten);
+function addNewKitten(event) {
   event.preventDefault();
   const valueDesc = inputDesc.value;
   const valuePhoto = inputPhoto.value;
@@ -133,7 +126,7 @@ btnAdd.addEventListener("click", (event) =>{
   } else {
     labelMesageError.innerHTML = "" ;
   }
-})
+}
 
 
 const btnSearch = document.querySelector(".js-button-search");
@@ -141,8 +134,18 @@ const searchDesc = document.querySelector('.js_in_search_desc');
 const searchRace = document.querySelector (".js-input-race");
 const searchResult = document.querySelector (".js-result-search");
 
+const filterKitten = (event) => {
 
-
+  if (kittenOneDesc.includes(descrSearchText)) {
+    listElement.innerHTML = kittenOne;
+  }
+  if (kittenTwoDesc.includes(descrSearchText)) {
+    listElement.innerHTML += kittenTwo;
+  }
+  if (kittenThreeDesc.includes(descrSearchText)) {
+    listElement.innerHTML += kittenThree;
+  }
+}  
 btnSearch.addEventListener("click", (event) =>{
   event.preventDefault();
   const valueDesc = searchDesc.value;
@@ -154,10 +157,14 @@ btnSearch.addEventListener("click", (event) =>{
   }
 })
 
+btnSearch.addEventListener('click', filterKitten);
+
+
+
 const btnCancel = document.querySelector(".js-btn-cancel");
 const valueRace = inputRace.value;
 
-btnCancel.addEventListener ("click", (event) => {
+const cancelNewKitten = (event) => {
   event.preventDefault();
   newForm.classList.add("collapsed");
   inputName.value = "";
@@ -165,8 +172,8 @@ btnCancel.addEventListener ("click", (event) => {
   inputDesc.value = "";
   inputRace.value = "";
 
-})
-
+};
+btnCancel.addEventListener("click", cancelNewKitten);
 
 // funciones
 
@@ -198,29 +205,29 @@ function handleClickNewCatForm(event) {
 
 
 function renderKitten(url, desc, name, race) {
-  const newKitten = `<li class="card">
-<article>
+  let kitten = `<li class="card">
+  <article>
   <img
     class="card_img"
-    src= ${kittenImage}
+    src = ${url}
     alt="gatito"
   />
-  <h3 class="card_title"> ${kittenNameUpper}</h3>`;
+  <h3 class="card_title"> ${name}</h3>`;
 
-  if (kittenRace === "") {
-    kittenOne += `No se ha especificado la raza`;
+  if (race === "") {
+    kitten += `No se ha especificado la raza`;
   } else {
-    kittenOne += kittenOneRace;
+    kitten += race;
   }
   
-  kittenOne += `<p class="card_description">
-  ${kittenDesc}
+  kitten += `<p class="card_description">
+  ${desc}
   </p>
 </article>
 </li>`;
-
-
-
+listElement.innerHTML += kitten;
 
 }
+
+ renderKitten  ("https://images.emedicinehealth.com/images/article/main_image/cat-scratch-disease.jpg", " Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!","Anastacio", "British Shorthair" );
 
