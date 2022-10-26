@@ -149,19 +149,21 @@ btnSearch.addEventListener("click", (event) =>{
 
 
 const filterKitten = (event) => {
-  const kitten = cat1.kittenOneDesc;
+  event.preventDefault();
+  const catOne = cat1;
+  const catTwo = cat2;
+  const catThree = cat3;
   const valueDesc = searchDesc.value;
-  
-  if (kitten.includes(valueDesc)) {
-  console.log('jsjs');
-    listElement.innerHTML += kitten;
+  listElement.innerHTML = '';
+  if (kittenOneDesc.includes(valueDesc)) {
+    listElement.innerHTML += catOne;
   }
-  // if (kittenTwoDesc.includes(descrSearchText)) {
-  //   listElement.innerHTML += kitten;
-  // }
-  // if (kittenThreeDesc.includes(descrSearchText)) {
-  //   listElement.innerHTML += kittenThree;
-  // }
+  if (kittenTwoDesc.includes(valueDesc)) {
+    listElement.innerHTML += catTwo;
+  }
+  if (kittenThreeDesc.includes(valueDesc)) {
+    listElement.innerHTML += catThree;
+  }
   
 }  
 
@@ -212,9 +214,6 @@ function handleClickNewCatForm(event) {
 // crear un nuevo gatito
 
 
-
-debugger;
-
 function renderKitten(url, desc, name, race) {
   
   let result = `<li class="card">
@@ -240,14 +239,13 @@ function renderKitten(url, desc, name, race) {
 return result;
 }
 
-//  Preguntar mañana
-// const cat1 = renderKitten ("https://ychef.files.bbci.co.uk/976x549/p07ryyyj.jpg", " Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!","Anastacio", "British Shorthair" );
-// const cat2 =renderKitten  ("https://images.emedicinehealth.com/images/article/main_image/cat-scratch-disease.jpg", " Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!","Fiona", "British Shorthair" );
-// const cat3 = renderKitten  ("https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/newscms/2019_39/3021711/190923-cat-pet-stock-cs-1052a.jpg", " Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!","Cielo", "British Shorthair" );
-
 
 const cat1 = renderKitten(`${kittenOneImage}`, `${kittenOneDesc}`, `${kittenOneNameUpper}`, `${kittenOneRace}`);
 const cat2 = renderKitten(`${kittenTwoImage}`, `${kittenTwoDesc}`, `${kittenTwoNameUpper}`, `${kittenTwoRace}`);
 const cat3 = renderKitten(`${kittenThreeImage}`, `${kittenThreeDesc}`, `${kittenThreeNameUpper}`, `${kittenThreeRace}`);
 
 listElement.innerHTML = cat1 + cat2 + cat3;
+
+function renderRace(){
+  
+}
