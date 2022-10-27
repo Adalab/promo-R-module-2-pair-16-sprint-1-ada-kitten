@@ -214,25 +214,25 @@ function handleClickNewCatForm(event) {
 // crear un nuevo gatito
 
 
-function renderKitten(url, desc, name, race) {
+function renderKitten(kittenData) {
   
   let result = `<li class="card">
   <article>
   <img
     class="card_img"
-    src = ${url}
+    src = ${kittenData.image}
     alt="gatito"
   />
-  <h3 class="card_title"> ${name}</h3>`;
+  <h3 class="card_title"> ${kittenData.name}</h3>`;
 
-  if (race === "") {
+  if (kittenData.race === "") {
     result += `No se ha especificado la raza`;
   } else {
-    result += race;
+    result += kittenData.race;
   }
-  
+
   result += `<p class="card_description">
-  ${desc}
+  ${kittenData.desc}
   </p>
 </article>
 </li>`;
@@ -240,12 +240,36 @@ return result;
 }
 
 
-const cat1 = renderKitten(`${kittenOneImage}`, `${kittenOneDesc}`, `${kittenOneNameUpper}`, `${kittenOneRace}`);
-const cat2 = renderKitten(`${kittenTwoImage}`, `${kittenTwoDesc}`, `${kittenTwoNameUpper}`, `${kittenTwoRace}`);
-const cat3 = renderKitten(`${kittenThreeImage}`, `${kittenThreeDesc}`, `${kittenThreeNameUpper}`, `${kittenThreeRace}`);
+// const cat1 = renderKitten(`${kittenOneImage}`, `${kittenOneDesc}`, `${kittenOneNameUpper}`, `${kittenOneRace}`);
+// const cat2 = renderKitten(`${kittenTwoImage}`, `${kittenTwoDesc}`, `${kittenTwoNameUpper}`, `${kittenTwoRace}`);
+// const cat3 = renderKitten(`${kittenThreeImage}`, `${kittenThreeDesc}`, `${kittenThreeNameUpper}`, `${kittenThreeRace}`);
 
-listElement.innerHTML = cat1 + cat2 + cat3;
 
-function renderRace(){
-  
-}
+
+
+//ejemplo de un objeto con la información del primer gatito
+
+const kittenData_1 = {
+  image : "https://ychef.files.bbci.co.uk/976x549/p07ryyyj.jpg",
+  name : "Anastacio",
+  desc : " Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!",
+  race : "",
+  };
+const kittenData_2 = {
+  image : "https://images.emedicinehealth.com/images/article/main_image/cat-scratch-disease.jpg",
+  name : "Fiona",
+  desc : " Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!",
+  race : "British Shorthair",
+
+};
+const kittenData_3 = {
+  image : "https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/newscms/2019_39/3021711/190923-cat-pet-stock-cs-1052a.jpg",
+  name : "Cielo",
+  desc : " Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!",
+  race : "British Shorthair",
+};
+
+
+const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
+
+listElement.innerHTML = renderKitten(kittenData_1) + renderKitten(kittenData_2)  + renderKitten(kittenData_3) ;
