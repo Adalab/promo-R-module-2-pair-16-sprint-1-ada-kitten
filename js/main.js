@@ -148,27 +148,8 @@ btnSearch.addEventListener("click", (event) =>{
 })
 
 
-const filterKitten = (event) => {
-  event.preventDefault();
-  const catOne = cat1;
-  const catTwo = cat2;
-  const catThree = cat3;
-  const valueDesc = searchDesc.value;
-  listElement.innerHTML = '';
-  if (kittenOneDesc.includes(valueDesc)) {
-    listElement.innerHTML += catOne;
-  }
-  if (kittenTwoDesc.includes(valueDesc)) {
-    listElement.innerHTML += catTwo;
-  }
-  if (kittenThreeDesc.includes(valueDesc)) {
-    listElement.innerHTML += catThree;
-  }
-  
-}  
 
 
-btnSearch.addEventListener('click', filterKitten);
 
 
 
@@ -273,3 +254,35 @@ const kittenData_3 = {
 const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
 
 listElement.innerHTML = renderKitten(kittenData_1) + renderKitten(kittenData_2)  + renderKitten(kittenData_3) ;
+
+
+
+function renderKittenList(kittenDataList) {
+  listElement.innerHTML = '';
+  //Completa el código:
+  for (const kittenItem of kittenDataList) {
+    listElement.innerHTML += renderKitten(kittenItem);
+}
+    //Iteramos sobre el listado de gatitos
+  //Y por cada iteración pintamos un gatito.
+  //utilizando la función renderKitten(kittenItem)
+}
+renderKittenList(kittenDataList);
+
+function filterKitten(event) {
+  event.preventDefault();
+  const valueDesc = searchDesc.value;
+  listElement.innerHTML = '';
+
+  for (const kittenItem of kittenDataList) {
+    if (kittenItem.desc.includes(valueDesc)){
+    listElement.innerHTML += renderKitten(kittenItem);
+    }
+    //Completa el código
+    //Comprueba si cada gatito contiene la descripción
+    //Si la contiene pintamos un gatito
+    //utilizando la función renderKitten(kittenItem)
+  }
+}  
+
+btnSearch.addEventListener('click', filterKitten());
